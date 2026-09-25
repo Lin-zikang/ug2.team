@@ -1,0 +1,206 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f7f9ff" />
+  <meta name="description" content="小学二年级联合会官方文章、帖子与 Markdown 发布工具。" />
+  <title>内容中心｜小学二年级联合会</title>
+  <link rel="icon" href="logo.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/community.css?v=20260919-r7" />
+  <script src="assets/library-loader.js?v=20260919-r3" charset="UTF-8"></script>
+</head>
+<body>
+  <div class="page-glow page-glow-a"></div>
+  <div class="page-glow page-glow-b"></div>
+
+  <header class="app-header">
+    <div class="shell header-row">
+      <a class="brand" href="index.html" aria-label="返回小学二年级联合会主页">
+        <span class="brand-logo"><img src="logo.svg" alt="小学二年级联合会会标" /></span>
+        <span class="brand-copy">
+          <strong>小学二年级联合会</strong>
+          <span>Official Content Center</span>
+        </span>
+      </a>
+      <div class="header-actions">
+        <span class="library-state" id="libraryState" role="status">正在准备 Markdown 与 LaTeX…</span>
+        <a class="soft-button" href="index.html">返回主页</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell main-layout">
+    <section class="intro-card">
+      <div>
+        <span class="eyebrow">OFFICIAL · UNITED GRADE-2</span>
+        <h1>文章、帖子与<span>你的创作</span></h1>
+        <p>浏览官方发布，或在浏览器中实时书写 Markdown。支持 LaTeX 公式、本地草稿缓存、加密文本下载与本地成稿管理。</p>
+      </div>
+      <div class="intro-logo" aria-hidden="true"><img src="logo.svg" alt="" /></div>
+    </section>
+
+    <nav class="section-tabs" aria-label="内容栏目">
+      <button class="tab-button active" data-route="articles" type="button">官方文章</button>
+      <button class="tab-button" data-route="posts" type="button">官方帖子</button>
+      <button class="tab-button" data-route="publish" type="button">发布我的</button>
+    </nav>
+
+    <section class="view-panel active" id="articlesView" data-view="articles">
+      <div class="panel-heading">
+        <div>
+          <span class="panel-kicker">ARTICLES</span>
+          <h2>官方文章</h2>
+          <p>较完整、系统的研究与议论内容。</p>
+        </div>
+        <button class="outline-button" type="button" data-refresh="articles">↻ 手动刷新</button>
+      </div>
+      <form class="community-search" data-search-route="articles" role="search" aria-label="搜索官方文章">
+        <label class="search-label" for="articlesSearchInput">按标题或作者检索文章</label>
+        <div class="search-controls">
+          <div class="search-input-wrap">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input id="articlesSearchInput" class="search-input" type="search" maxlength="80" autocomplete="off" placeholder="输入标题或作者名称" />
+          </div>
+          <button class="search-button" type="submit">搜索</button>
+          <button class="search-clear" type="button" data-search-clear="articles" hidden>清除</button>
+        </div>
+        <p class="search-status" id="articlesSearchStatus" aria-live="polite">输入关键词后点击“搜索”。</p>
+      </form>
+      <div class="content-list" id="articlesList" aria-live="polite"></div>
+      <nav class="pagination" id="articlesPagination" aria-label="官方文章分页"></nav>
+    </section>
+
+    <section class="view-panel" id="postsView" data-view="posts">
+      <div class="panel-heading">
+        <div>
+          <span class="panel-kicker">POSTS</span>
+          <h2>官方帖子</h2>
+          <p>更轻量的观察、记录、问题与讨论。</p>
+        </div>
+        <button class="outline-button" type="button" data-refresh="posts">↻ 手动刷新</button>
+      </div>
+      <form class="community-search" data-search-route="posts" role="search" aria-label="搜索官方帖子">
+        <label class="search-label" for="postsSearchInput">按标题或作者检索帖子</label>
+        <div class="search-controls">
+          <div class="search-input-wrap">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input id="postsSearchInput" class="search-input" type="search" maxlength="80" autocomplete="off" placeholder="输入标题或作者名称" />
+          </div>
+          <button class="search-button" type="submit">搜索</button>
+          <button class="search-clear" type="button" data-search-clear="posts" hidden>清除</button>
+        </div>
+        <p class="search-status" id="postsSearchStatus" aria-live="polite">输入关键词后点击“搜索”。</p>
+      </form>
+      <div class="content-list" id="postsList" aria-live="polite"></div>
+      <nav class="pagination" id="postsPagination" aria-label="官方帖子分页"></nav>
+    </section>
+
+    <section class="view-panel" id="publishView" data-view="publish">
+      <div class="panel-heading publish-heading">
+        <div>
+          <span class="panel-kicker">MY PUBLISHING</span>
+          <h2>发布我的</h2>
+          <p>输入内容时会实时渲染与缓存；点击完成后形成不可修改的本地成稿。</p>
+        </div>
+        <span class="cache-badge" id="draftStatus">草稿已启用本地缓存</span>
+      </div>
+
+      <div class="editor-meta-grid">
+        <label class="field-label">
+          <span>文章标题</span>
+          <input id="draftTitle" maxlength="80" placeholder="请输入标题" autocomplete="off" />
+        </label>
+        <label class="field-label">
+          <span>内容类型</span>
+          <select id="draftType">
+            <option value="article">文章</option>
+            <option value="post">帖子</option>
+          </select>
+        </label>
+        <label class="field-label summary-field">
+          <span>内容摘要（选填）</span>
+          <textarea id="draftSummary" class="summary-textarea" maxlength="180" spellcheck="false" placeholder="选填：填写后会显示在标题下方；不填写则详情页不单独显示摘要。"></textarea>
+        </label>
+      </div>
+
+      <div class="editor-grid">
+        <div class="editor-pane">
+          <div class="pane-title"><strong>Markdown 原文</strong><span id="wordCount">0 字</span></div>
+          <textarea id="markdownInput" spellcheck="false" placeholder="# 从这里开始写作\n\n支持 **Markdown** 与 LaTeX：$E=mc^2$"></textarea>
+        </div>
+        <div class="preview-pane">
+          <div class="pane-title"><strong>实时预览</strong><span>自动渲染</span></div>
+          <article class="official-paper preview-paper" id="livePreview">
+            <div class="paper-watermark"><img src="logo.svg" alt="" /></div>
+            <div class="markdown-body" id="previewContent"></div>
+            <footer class="paper-signature">
+              <a class="paper-wordmark-link" href="index.html" aria-label="返回小学二年级联合会首页">
+                <img class="paper-wordmark" src="https://i.imgs.ovh/2026/06/21/1cd907bf4c68be34bca7f75690bd1757.png" alt="小学二年级联合会横向文字标识" />
+              </a>
+            </footer>
+          </article>
+        </div>
+      </div>
+
+      <div class="editor-actions">
+        <button class="ghost-button" id="clearDraft" type="button">清空草稿</button>
+        <button class="primary-button" id="finishDraft" type="button">完成并保存</button>
+      </div>
+
+      <div class="local-section">
+        <div class="panel-heading compact-heading">
+          <div>
+            <span class="panel-kicker">LOCAL ARCHIVE</span>
+            <h2>我的本地成稿</h2>
+            <p>成稿只能查看、复制、下载或删除，不能重新编辑。</p>
+          </div>
+          <button class="outline-button" type="button" id="refreshLocal">↻ 刷新列表</button>
+        </div>
+        <div class="content-list" id="localList"></div>
+        <nav class="pagination" id="localPagination" aria-label="本地成稿分页"></nav>
+      </div>
+
+      <div class="review-notice">
+        <div class="review-icon">✉</div>
+        <div>
+          <strong>提交审核</strong>
+          <p>请将下载得到的加密 .txt 文件发送至 <a href="mailto:united-grade2@qq.com">united-grade2@qq.com</a> 进行审核。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="view-panel detail-view" id="detailView" data-view="detail">
+      <button class="back-button" id="backButton" type="button">← 返回列表</button>
+      <div id="detailHost"></div>
+    </section>
+  </main>
+
+  <div class="dialog-backdrop" id="finishDialog" hidden>
+    <div class="dialog-card" role="dialog" aria-modal="true" aria-labelledby="finishDialogTitle">
+      <button class="dialog-close" type="button" data-close-dialog aria-label="关闭">×</button>
+      <span class="panel-kicker">COMPLETE</span>
+      <h2 id="finishDialogTitle">完成本次创作</h2>
+      <p>请输入创作者名称。标题、摘要、名称、类型与正文会写入加密文件内部；创作日期不写入加密文件，仅保存在本地成稿，并在发布清单中按 title、name、data 登记；保存后内容将进入本地成稿，不可修改。</p>
+      <label class="field-label">
+        <span>创作者名称</span>
+        <input id="creatorName" maxlength="60" placeholder="请输入名称" autocomplete="name" />
+      </label>
+      <label class="check-row"><input type="checkbox" id="downloadOnFinish" checked /> <span>完成后立即下载加密 .txt 文件</span></label>
+      <button class="primary-button full-button" id="confirmFinish" type="button">确认完成</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <span>© 小学二年级联合会 · United Grade-2</span>
+      <div><a href="https://qm.qq.com/q/WfIoCCzMoC" target="_blank" rel="noopener noreferrer">官方QQ群</a><a href="https://b23.tv/ynNuErx" target="_blank" rel="noopener noreferrer">官方 Bilibili</a></div>
+    </div>
+  </footer>
+
+  <script src="assets/community.js?v=20260919-r5" charset="UTF-8" defer></script>
+</body>
+</html>
