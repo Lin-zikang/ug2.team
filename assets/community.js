@@ -816,7 +816,7 @@
     const article = document.createElement('article');
     article.className = 'official-paper';
     article.innerHTML = `
-      <div class="paper-watermark"><img src="logo.svg" alt="" /></div>
+      <div class="paper-watermark"><img src="logo.svg" alt="小学二年级联合会水印标识" /></div>
       <header class="paper-header">
         <span class="panel-kicker">${item.type === 'post' ? 'OFFICIAL POST' : 'OFFICIAL ARTICLE'}</span>
         <h1>${escapeHtml(item.title || '未命名')}</h1>
